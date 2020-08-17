@@ -139,4 +139,4 @@ cython_debug/
 
 # Database related files
 migrations/
-.sqlite
+*.sqlite
