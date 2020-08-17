@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -71,7 +71,7 @@ def addpuppy():
         add_pup = Puppy(name)
         db.session.add(add_pup)
         db.session.commit()
-        
+        flash("Successfully added new puppy!", 'success')
         return redirect(url_for('listpuppy'))
 
     return render_template('addpuppy.html', form=form)
@@ -85,11 +85,15 @@ def delpuppy():
         owner = Owner.query.filter_by(puppy_id=pup_id).first()
 
         del_puppy = Puppy.query.get(pup_id)
-        del_owner = Owner.query.get(owner.id)
-        db.session.delete(del_owner)
         db.session.delete(del_puppy)
+
+        if owner:
+            del_owner = Owner.query.get(owner.id)
+            db.session.delete(del_owner)
+
         db.session.commit()
 
+        flash("Successfully removed puppy.", 'success')
         return redirect(url_for('listpuppy'))
 
     return render_template('delpuppy.html', form=form)
@@ -111,6 +115,7 @@ def addowner():
         db.session.add(add_owner)
         db.session.commit()
         
+        flash("Successfully added new owner.", 'success')
         return redirect(url_for('listowner'))
 
     return render_template('addowner.html', form=form)
@@ -126,6 +131,7 @@ def delowner():
         db.session.delete(del_owner)
         db.session.commit()
 
+        flash("Successfully removed owner.", 'success')
         return redirect(url_for('listowner'))
 
     return render_template('delowner.html', form=form)
