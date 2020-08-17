@@ -29,9 +29,9 @@ class Puppy(db.Model):
 
     def __repr__(self):
         if self.ownerid:
-            return f"Puppy {self.name}, owner is {self.ownerid.name}"
+            return f"Puppy {self.name}, owner is {self.ownerid.name}. (ID: {self.id})"
         else:
-            return f"Puppy {self.name}, no owner."
+            return f"Puppy {self.name}, no owner. (ID: {self.id})"
 
 class Owner(db.Model):
     __tablename__ = "owners"
@@ -82,8 +82,11 @@ def delpuppy():
 
     if form.validate_on_submit():
         pup_id = form.pup_id.data
+        owner = Owner.query.filter_by(puppy_id=pup_id).first()
 
         del_puppy = Puppy.query.get(pup_id)
+        del_owner = Owner.query.get(owner.id)
+        db.session.delete(del_owner)
         db.session.delete(del_puppy)
         db.session.commit()
 
