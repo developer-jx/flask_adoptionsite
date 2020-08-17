@@ -52,6 +52,10 @@ class Owner(db.Model):
 def home():
     return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/puppies')
 def listpuppy():
     puppieslist = Puppy.query.all()
