@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Add an Owner</h1>
+    <p>Make sure to assign the new owner to an existing puppy!</p> 
+
+    <form methods="POST">
+        {{form.hidden_tag()}}
+        {{form.name.label}} {{form.name()}} <br> 
+        {{form.pup_id.label}} {{form.pup_id()}} <br>
+        {{form.submit()}}
+    </form>
+</div>
+{% endblock %}

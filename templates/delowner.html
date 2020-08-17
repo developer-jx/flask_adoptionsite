@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Remove an Owner</h1>
+    <p>Remember! Removing the owner doesn't remove the puppy.</p> 
+
+    <form methods="POST">
+        {{form.hidden_tag()}}
+        {{form.owner_id.label}} {{form.owner_id()}}
+        {{form.submit()}}
+    </form>
+</div>
+{% endblock %}

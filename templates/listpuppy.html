@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Want to adopt a puppy?</h1>
+    <p>Check out the puppies in our database, along with their current owners.</p> 
+
+    {% if puppieslist %}
+        {% for puppy in puppieslist %}
+            <ul>
+                <li>Puppy{{puppy}}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <h5>No puppies available.</h5>
+    {% endif %}
+</div>
+{% endblock %}
