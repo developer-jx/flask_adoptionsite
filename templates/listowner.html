@@ -4,10 +4,10 @@
     <h1>Current List of Owners</h1>
     <p>These are the currently registered owners of puppies.</p> 
 
-    {% if puppieslist %}
+    {% if ownerslist %}
         {% for owner in ownerslist %}
             <ul>
-                <li><b>{{owner.name}}</b> with Puppy ID {{owner.puppyid}}. (ID: {{owner.id}})</li>
+                <li><b>{{owner.name}}</b> with Puppy ID {{owner.puppy_id}}. (ID: {{owner.id}})</li>
             </ul>
         {% endfor %}
     {% else %}

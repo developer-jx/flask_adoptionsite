@@ -4,7 +4,7 @@
     <h1>Remove an Owner</h1>
     <p>Remember! Removing the owner doesn't remove the puppy.</p> 
 
-    <form methods="POST">
+    <form method="POST">
         {{form.hidden_tag()}}
         {{form.owner_id.label}} {{form.owner_id()}}
         {{form.submit()}}

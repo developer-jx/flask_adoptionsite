@@ -28,8 +28,8 @@ class Puppy(db.Model):
         self.name = name
 
     def __repr__(self):
-        if self.owner:
-            return f"Puppy {self.name}, owner is {self.owner.name}"
+        if self.ownerid:
+            return f"Puppy {self.name}, owner is {self.ownerid.name}"
         else:
             return f"Puppy {self.name}, no owner."
 
@@ -104,7 +104,7 @@ def addowner():
         name = form.name.data
         pup_id = form.pup_id.data
 
-        add_owner = Puppy(name, pup_id)
+        add_owner = Owner(name, pup_id)
         db.session.add(add_owner)
         db.session.commit()
         
@@ -125,7 +125,7 @@ def delowner():
 
         return redirect(url_for('listowner'))
 
-    return render_template('listowner.html', form=form)
+    return render_template('delowner.html', form=form)
 
 if __name__ == "__main__":
     app.run(debug=True)
