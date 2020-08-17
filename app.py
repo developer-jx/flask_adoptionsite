@@ -71,6 +71,7 @@ def addpuppy():
         add_pup = Puppy(name)
         db.session.add(add_pup)
         db.session.commit()
+        
         flash("Successfully added new puppy!", 'success')
         return redirect(url_for('listpuppy'))
 
@@ -84,17 +85,23 @@ def delpuppy():
         pup_id = form.pup_id.data
         owner = Owner.query.filter_by(puppy_id=pup_id).first()
 
-        del_puppy = Puppy.query.get(pup_id)
-        db.session.delete(del_puppy)
+        if del_puppy is not None:
+            if owner:
+                del_owner = Owner.query.get(owner.id)
+                db.session.delete(del_owner)
 
-        if owner:
-            del_owner = Owner.query.get(owner.id)
-            db.session.delete(del_owner)
+                db.session.commit()
 
-        db.session.commit()
-
-        flash("Successfully removed puppy.", 'success')
-        return redirect(url_for('listpuppy'))
+                flash("Successfully removed puppy.", 'success')
+                return redirect(url_for('listpuppy'))
+            else:
+                del_puppy = Puppy.query.get(pup_id)
+                db.session.delete(del_puppy)
+                flash("Successfully removed puppy and its assigned owner.", 'success')
+                return redirect(url_for('listpuppy'))
+        else:
+            flash("Error: Cannot remove puppy since it doesn't exist", 'danger')
+            return redirect(url_for('delpuppy'))
 
     return render_template('delpuppy.html', form=form)
 
@@ -111,12 +118,18 @@ def addowner():
         name = form.name.data
         pup_id = form.pup_id.data
 
-        add_owner = Owner(name, pup_id)
-        db.session.add(add_owner)
-        db.session.commit()
-        
-        flash("Successfully added new owner.", 'success')
-        return redirect(url_for('listowner'))
+        puppy_to_assign = Puppy.query.get(pup_id)
+
+        if puppy_to_assign is not None:
+            add_owner = Owner(name, pup_id)
+            db.session.add(add_owner)
+            db.session.commit()
+
+            flash("Successfully added new owner.", 'success')
+            return redirect(url_for('listowner'))
+        else:
+            flash("Error: Cannot add new owner. Puppy ID provided does not exist.", 'danger')
+            return redirect(url_for('addowner'))
 
     return render_template('addowner.html', form=form)
 
@@ -126,13 +139,16 @@ def delowner():
 
     if form.validate_on_submit():
         owner_id = form.owner_id.data
-
         del_owner = Owner.query.get(owner_id)
-        db.session.delete(del_owner)
-        db.session.commit()
 
-        flash("Successfully removed owner.", 'success')
-        return redirect(url_for('listowner'))
+        if del_owner is not None:
+            db.session.delete(del_owner)
+            db.session.commit()
+            flash("Successfully removed owner.", 'success')
+            return redirect(url_for('listowner'))
+        else: 
+            flash("Error: Cannot delete owner since it does not exist.", 'danger')
+            return redirect(url_for('delowner'))
 
     return render_template('delowner.html', form=form)
 
