@@ -107,6 +107,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+envx/
 env/
 venv/
 ENV/
@@ -143,3 +144,4 @@ migrations/
 
 # User added
 *.disabled
+.vscode/
