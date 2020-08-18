@@ -22,15 +22,15 @@
         <a class="nav-link" href="{{url_for('home')}}">Home</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="{{url_for('listpuppy')}}">Puppies</a>
+          <a class="nav-link" href="{{url_for('puppies.listpuppy')}}">Puppies</a>
         </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Manage Puppies
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{{url_for('addpuppy')}}">Add Puppy</a>
-          <a class="dropdown-item" href="{{url_for('delpuppy')}}">Delete Puppy</a>
+          <a class="dropdown-item" href="{{url_for('puppies.addpuppy')}}">Add Puppy</a>
+          <a class="dropdown-item" href="{{url_for('puppies.delpuppy')}}">Delete Puppy</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -38,9 +38,9 @@
             Manage Owners
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="{{url_for('listowner')}}">List Owners</a>
-            <a class="dropdown-item" href="{{url_for('addowner')}}">Add Owner</a>
-            <a class="dropdown-item" href="{{url_for('delowner')}}">Remove Owner</a>
+            <a class="dropdown-item" href="{{url_for('owners.listowner')}}">List Owners</a>
+            <a class="dropdown-item" href="{{url_for('owners.addowner')}}">Add Owner</a>
+            <a class="dropdown-item" href="{{url_for('owners.delowner')}}">Remove Owner</a>
           </div>
         </li>
         <li class="nav-item">
