@@ -12,7 +12,6 @@ def listowner():
     ownerslist = Owner.query.all()
     return render_template('listowner.html', ownerslist=ownerslist)
 
-
 @owners_blueprint.route('/add', methods=['GET', 'POST'])
 def addowner():
     form = AddForm()
@@ -23,13 +22,20 @@ def addowner():
 
         puppy_to_assign = Puppy.query.get(pup_id)
 
+        # This if-statement checks if the Puppy exists.
         if puppy_to_assign is not None:
-            add_owner = Owner(name, pup_id)
-            db.session.add(add_owner)
-            db.session.commit()
 
-            flash("Successfully added new owner.", 'success')
-            return redirect(url_for('owners.listowner'))
+            # This checks if puppy already has an owner.
+            if puppy_to_assign.ownerid is None:
+                add_owner = Owner(name, pup_id)
+                db.session.add(add_owner)
+                db.session.commit()
+
+                flash("Successfully added new owner.", 'success')
+                return redirect(url_for('owners.listowner'))
+            else:
+                flash("Error: Cannot add owner. Puppy already has one.", 'danger')
+                return redirect(url_for('owners.addowner'))
         else:
             flash("Error: Cannot add new owner. Puppy ID provided does not exist.", 'danger')
             return redirect(url_for('owners.addowner'))
@@ -44,6 +50,7 @@ def delowner():
         owner_id = form.owner_id.data
         del_owner = Owner.query.get(owner_id)
 
+        # This checks if the owner exists before deleting it.
         if del_owner is not None:
             db.session.delete(del_owner)
             db.session.commit()

@@ -5,8 +5,10 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
+# Secret key is used by the Form
 app.config['SECRET_KEY'] = 'somesecretkey1010101010'
 
+# Database Initialization
 base_dir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

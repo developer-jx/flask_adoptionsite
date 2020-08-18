@@ -4,6 +4,12 @@ from project import db
 class Puppy(db.Model):
     __tablename__ = "puppies"
 
+    # Table "puppies"
+    # Columns:
+    # - id
+    # - name
+    # - ownerid
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
     ownerid = db.relationship('Owner', backref='puppy', uselist=False)
@@ -19,6 +25,12 @@ class Puppy(db.Model):
 
 class Owner(db.Model):
     __tablename__ = "owners"
+
+    # Table "owners"
+    # Columns:
+    # - id
+    # - name
+    # - puppy_id
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)

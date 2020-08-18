@@ -19,6 +19,7 @@ def addpuppy():
     if form.validate_on_submit():
         name = form.name.data
 
+        # No ID checker since there can be multiple puppies with the same name.
         add_pup = Puppy(name)
         db.session.add(add_pup)
         db.session.commit()
@@ -38,7 +39,10 @@ def delpuppy():
 
         del_puppy = Puppy.query.get(pup_id)
 
+        # Checks if the puppy exists before attempting to delete it.
         if del_puppy is not None:
+
+            # Checks if puppy has an owner, if it does then delete the owner as well.
             if owner:
                 del_owner = Owner.query.get(owner.id)
 
