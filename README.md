@@ -27,9 +27,9 @@ Check the requirements.txt and install all modules before starting up the projec
 ### Third-party issues
 There's a certain issue in SQLAlchemy that still doesn't seem to be fixed. The `time.clock()` no longer exists in the latest versions of Python, so to mitigate this issue perform these changes on the modules:
  1. Head to *environment_name\Lib\site-packages\flask_sqlalchemy\__init__.py* \
-	Proceed to change `time.clock()` to `time.perf_counter()` in Line 39.
+	Proceed to change `time.clock` to `time.perf_counter` in Line 39.
  2. Head to *environment_name\Lib\site-packages\mako\compat.py* \
-	Proceed to change `time.clock()` to `time.perf_counter()` in Line 124.
+	Proceed to change `time.clock` to `time.perf_counter` in Line 124.
 
 ## Database
 Initialize the database first through the **app.py** script in a terminal.
