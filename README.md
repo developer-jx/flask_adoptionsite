@@ -7,11 +7,11 @@ Repository created in order to follow a review from a Python Flask tutorial by P
 
 ## Dependencies
 Check the requirements.txt and install all modules before starting up the project. \
-Install the modules through Pip. \
+Install SQLite in your system through their installer. \
+Install the Python modules through Pip. (see requirements.tx) \
 `$ pip install -r requirements.txt`
 
 ## Database
-This project uses SQLite (see requirements.txt)
 Initialize the database first through the **app.py** script in a terminal.
  1. Set Flask environment variable first, enter the directory \
  	Windows: `$ set FLASK_APP=app.py` \
