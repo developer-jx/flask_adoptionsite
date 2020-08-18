@@ -7,9 +7,11 @@ Repository created in order to follow a review from a Python Flask tutorial by P
 
 ## Dependencies
 Check the requirements.txt and install all modules before starting up the project. \
-Install SQLite in your system through their installer. \
-Install the Python modules through Pip. (see requirements.tx) \
-`$ pip install -r requirements.txt`
+ 1. Install SQLite in your system through their installer. \
+ 2. Install the Python modules through Pip. (see requirements.tx) \
+	`$ pip install -r requirements.txt`
+ 3. This project connects to BootstrapCDN. Make sure that the code is run on a computer with internet \
+ 	`https://getbootstrap.com/`
 
 ## Database
 Initialize the database first through the **app.py** script in a terminal.
